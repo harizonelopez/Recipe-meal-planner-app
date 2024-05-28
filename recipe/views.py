@@ -62,8 +62,6 @@ def generate_pdf(request):
     for recipe in recipes:
         p.drawString(100, y, f"Recipe: {recipe.name}")
         y -= 20
-        p.drawString(100, y, f"Day: {recipe.day}")
-        y -= 20
         p.drawString(100, y, "Ingredients:")
         y -= 20
         for line in recipe.ingredients.split('\n'):
