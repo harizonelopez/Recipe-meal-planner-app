@@ -2,18 +2,91 @@
 {% block title %} homepage {% endblock %}
 
 {% block content %}
-<h2>Recipes</h2>
-<a href="{% url 'recipe_new' %}">Add new recipe</a>
-<ul>
-    {% for recipe in recipes %}
-        <li>
-            <a href="{% url 'recipe_edit' recipe.pk %}">{{ recipe.name }}</a>
-            <form action="{% url 'recipe_delete' recipe.pk %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'generate_pdf' %}">Download PDF</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #282c35;
+            color: #fff;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        header {
+            background-color: #1e2229;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #373c49;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #1e2229;
+            text-align: center;
+            padding: 0em 0;
+            position: fixed;
+            bottom: 0;
+            width: 65%;
+        }
+
+        a:hover {
+            color: rgb(171, 17, 17);
+        }
+
+        a {
+            color: orange;
+        }
+
+        h1 {
+            line-height: 1.7;
+            color: aqua;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <header>- - - Welcome To The Meal Planner App - - -</header>
+        <h1 align="center">*** Recipe Meal Planner ***</h1>
+        <section>
+            <button class="btn-success"><a href="{% url 'recipe_new' %}">Add new recipe</a></button>
+            <ol>
+                {% for recipe in recipes %}
+                    <section>
+                        <li>
+                            <a href="{% url 'recipe_edit' recipe.pk %}">{{ recipe.name }}</a>
+                            <form action="{% url 'recipe_delete' recipe.pk %}" method="POST">
+                                {% csrf_token %}
+                                <br>
+                                <button class="btn-secondary" type="submit">Delete</button>
+                            </form>
+                        </li>
+                    </section>
+                {% endfor %}
+            </ol>
+            <h6 align="center"><button class="btn-primary"><a href="{% url 'generate_pdf' %}">Download PDF</a></button></h4>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Dev_aladinh production</p>
+        </footer>
+
+    </section>
+</body>
+</html>
 {% endblock %}

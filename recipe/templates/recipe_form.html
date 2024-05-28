@@ -2,10 +2,129 @@
 {% block title %} recipes page {% endblock %}
 
 {% block content %}
-<h2>{{ form.instance.pk|yesno:"Edit Recipe,Add Recipe" }}</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #282c35;
+            color: #fff;
+            align-items: center;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        header {
+            background-color: #1e2229;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #373c49;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #1e2229;
+            text-align: center;
+            padding: 0em 0;
+            position: fixed;
+            bottom: 0;
+            width: 65%;
+        }
+
+        a:hover {
+            color: rgb(125, 171, 17);
+        }
+
+        a {
+            color: rgb(255, 0, 123);
+        }
+
+        h1 {
+            line-height: 1.7;
+            color: aqua;
+        }
+        
+        h4 {
+            text-align: center;
+            color: #28d5de;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: flex;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <header>Edit & Add Recipe</header>
+        <h1 align="center">{{ form.instance.pk|yesno:"Edit Recipe,Add Recipe" }}</h1>
+        <section>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h4>{{ form.name.label_tag }}</h4>
+                        {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <h4>{{ form.day.label_tag }}</h4>
+                        {{ form.day }}
+                </div>
+                <div class="form-group">
+                    <h4>{{ form.ingredients.label_tag }}</h4>
+                        {{ form.ingredients }}
+                </div>
+                <div class="form-group">
+                    <h4>{{ form.instructions.label_tag }}</h4>
+                        {{ form.instructions }}
+                </div>
+                <button class="btn btn-secondary" type="submit">Save</button>
+            </form>
+        </section>
+        <h6 align="center"><button class="btn btn-primary"><a href="{% url 'home' %}">home</a></button></h6>
+
+        <footer>
+            <p>&copy; 2024 Dev_aladinh production</p>
+        </footer>
+
+    </section>
+</body>
+</html>
 {% endblock %}
