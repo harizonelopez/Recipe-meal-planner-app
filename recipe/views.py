@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout
-from .forms import UserRegisterForm
+from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse
 from .models import Recipe
 from .forms import RecipeForm
 from django.contrib.auth.decorators import login_required
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 @login_required
 def home(request):
@@ -23,6 +23,7 @@ def recipe_new(request):
             recipe = form.save(commit=False)
             recipe.user = request.user
             recipe.save()
+            messages.success(request, "Recipe successfully created")
             return redirect('home')
     else:
         form = RecipeForm()
@@ -37,6 +38,7 @@ def recipe_edit(request, pk):
             recipe = form.save(commit=False)
             recipe.user = request.user
             recipe.save()
+            messages.success(request, "Recipe successfully updated")
             return redirect('home')
     else:
         form = RecipeForm(instance=recipe)
@@ -46,6 +48,7 @@ def recipe_edit(request, pk):
 def recipe_delete(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipe.delete()
+    messages.success(request, "Recipe successfully deleted")
     return redirect('home')
 
 @login_required
@@ -80,26 +83,34 @@ def generate_pdf(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.save()    
+        messages.success(request, "Account created successfully")
+        return redirect('login')
     else:
-        form = UserRegisterForm()
-    return render(request, 'register.html', {'form': form})
+        return render(request, 'register.html')
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
             login(request, user)
             return redirect('home')
+        else:
+            messages.warning(request, "Invalid username or password. Try again.")
+            return redirect('login')
     else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html', {})
 
+@login_required
 def logout_view(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('login')
+    logout(request)
+    messages.success(request, "You have successfully logged out")
+    return redirect('login')
