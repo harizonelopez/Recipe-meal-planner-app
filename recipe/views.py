@@ -87,6 +87,18 @@ def register(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
+        if User.objects.filter(username=username, email=email).exists():
+            messages.warning(request, "User details already taken. login instead.")
+            return redirect('login')
+
+        if User.objects.filter(username=username).exists():
+            messages.warning(request, "Username already exists.")
+            return redirect('register')
+
+        if User.objects.filter(email=email).exists():
+            messages.warning(request, "Email already exists.")
+            return redirect('register')
+
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()    
         messages.success(request, "Account created successfully")
@@ -113,4 +125,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, "You have successfully logged out")
-    return redirect('login')
+    return redirect('register')
