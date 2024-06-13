@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 @login_required

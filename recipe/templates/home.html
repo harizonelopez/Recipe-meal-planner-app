@@ -38,6 +38,7 @@
         footer {
             background-color: #1e2229;
             text-align: center;
+            color: turquoise;
             padding: 0em 0;
             position: fixed;
             bottom: 0;
@@ -52,22 +53,13 @@
             color: orange;
         }
 
-        h1 {
+        h1, h2 {
             line-height: 1.7;
             color: aqua;
         }
 
-        h3, h5 {
+        h3, h4, h5 {
             line-height: 1.6;
-            color: #FF1493;
-        }
-
-        h1, h2 {
-            color: #61dafb;
-        }
-
-        h4 {
-            line-height: 1.5;
             color: #FF1493;
         }
 
@@ -78,7 +70,6 @@
         <header>- - - Welcome To The Meal Planner App - - -</header>
         <h1 align="center">*** Recipe Meal Planner ***</h1>
         <hr><hr>
-
         {% if user.is_authenticated %}
             <h4 align="center">Welcome, {{ user.username }}!</h4>
             <section>
@@ -97,7 +88,7 @@
                         </section>
                     {% endfor %}
                 </ol>
-                <h6 align="center"><button class="btn-primary"><a href="{% url 'generate_pdf' %}">Download PDF</a></button></h4>
+                <h6 align="center"><button class="btn-primary"><a href="{% url 'generate_pdf' %}">Download</a></button></h4>
             </section>
         {% else %}
             <section align="center">

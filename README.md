@@ -60,3 +60,6 @@ This project is a Recipe Meal Planner built with Django. It allows users to regi
 ```sh
  Open web browser and go to `http://127.0.0.1:8000`.
 ``` 
+
+## Contact
+ For any enquiry you can reach me via e-mail [harizonelopez24@2gmail.com]
