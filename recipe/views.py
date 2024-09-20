@@ -16,7 +16,7 @@ def home(request):
 
 @login_required
 def recipe_new(request):
-    if request.method == "POST":
+    if request.method=="POST":
         form = RecipeForm(request.POST)
         if form.is_valid():
             recipe = form.save(commit=False)
@@ -31,7 +31,7 @@ def recipe_new(request):
 @login_required
 def recipe_edit(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
-    if request.method == "POST":
+    if request.method=="POST":
         form = RecipeForm(request.POST, instance=recipe)
         if form.is_valid():
             recipe = form.save(commit=False)
@@ -81,7 +81,7 @@ def generate_pdf(request):
     return response
 
 def register(request):
-    if request.method == 'POST':
+    if request.method=='POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -106,7 +106,7 @@ def register(request):
         return render(request, 'register.html')
 
 def login_view(request):
-    if request.method == 'POST':
+    if request.method=='POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)

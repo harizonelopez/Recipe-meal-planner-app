@@ -20,7 +20,7 @@ This project is a Recipe Meal Planner built with Django. It allows users to regi
 ### 1. Clone the Repository
 
 ```sh
- git clone https://github.com/yourusername/recipe-meal-planner.git
+ git clone https://github.com/harizonelopez/recipe-meal-planner.git
  cd recipe-meal-planner
 ```
 
@@ -58,7 +58,7 @@ This project is a Recipe Meal Planner built with Django. It allows users to regi
 ### 7. Access the Application
 
 ```sh
- Open web browser and go to `http://127.0.0.1:8000`.
+ Open web browser and go to `http://127.0.0.1:8000`
 ``` 
 
 ## Contact

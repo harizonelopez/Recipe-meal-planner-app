@@ -62,7 +62,6 @@
             line-height: 1.6;
             color: #FF1493;
         }
-
     </style>
 </head>
 <body>
@@ -73,7 +72,7 @@
         {% if user.is_authenticated %}
             <h4 align="center">Welcome, {{ user.username }}!</h4>
             <section>
-                <button class="btn-success"><a href="{% url 'recipe_new' %}">Add new recipe</a></button>
+                <button class="btn btn-success"><a href="{% url 'recipe_new' %}">Add new recipe</a></button>
                 <ol>
                     {% for recipe in recipes %}
                         <section>
@@ -88,7 +87,7 @@
                         </section>
                     {% endfor %}
                 </ol>
-                <h6 align="center"><button class="btn-primary"><a href="{% url 'generate_pdf' %}">Download</a></button></h4>
+                <h6 align="center"><button class="btn btn-primary"><a href="{% url 'generate_pdf' %}">Download</a></button></h4>
             </section>
         {% else %}
             <section align="center">
