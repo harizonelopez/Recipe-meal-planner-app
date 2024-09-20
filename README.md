@@ -58,7 +58,7 @@ This project is a Recipe Meal Planner built with Django. It allows users to regi
 ### 7. Access the Application
 
 ```sh
- Open web browser and go to http://127.0.0.1:8000
+ Open web browser and go to `http://127.0.0.1:8000`
 ``` 
 
 ## Contact
